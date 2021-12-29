@@ -14,21 +14,11 @@ int main(int argc, char const *argv[])
     // dosya açma işlemi//
     FILE *sayi1;
     FILE *sayi2;
-    ;
-    if ((sayi1 = fopen("sayi1.txt", "r")) == NULL)
-    {
-        fprintf(stderr, "\nError open \"sayi1.txt\" file\n");
-        exit(EXIT_FAILURE);
-    }
-    else if ((sayi2 = fopen("sayi2.txt", "r")) == NULL)
-    {
-        fprintf(stderr, "\nError open \"sayi2.txt\" file\n");
-        exit(EXIT_FAILURE);
-    }
-    else
-    {
-    //////////
-    short girdi;
+    sayi1 = dosyaAc(sayi1,"sayi1.txt");
+    sayi2 = dosyaAc(sayi2,"sayi2.txt");
+    //int *sayi1Matris = matrisOlustur();
+    //matrisYazdir(sayi1Matris);
+    int girdi;
     puts("Lutfen islem seciniz.");
     scanf("%d", &girdi);
     while (girdi <= 5 && girdi >= 1)
@@ -44,7 +34,7 @@ int main(int argc, char const *argv[])
         case 3: //[+/-]-> Islem seciniz: (+ veya -)
             puts("Islem seciniz.[+/-]");
             char matIslem;
-            gets(matIslem);
+            scanf("%d",matIslem);
             break;
         case 4: //[4]-> Sonucu ekrana yazdır: (4)
 
@@ -58,6 +48,5 @@ int main(int argc, char const *argv[])
             return EXIT_FAILURE;
             break;
         }
-    }
     }
 }

@@ -9,6 +9,9 @@
 #define _ISLEMLER_
 
 void hello();
+FILE *dosyaAc(FILE *file,char *dosyaAdi);
+void matrisYazdir(int *matris,int boyut);
+int *matrisOlustur(int matrisBoyutu);
 void dosyadanOku();
 void yazdir();
 
