@@ -19,11 +19,10 @@ int main(int argc, char const *argv[])
     //int *sayi1Matris = matrisOlustur();
     //matrisYazdir(sayi1Matris);
     int girdi;
+    do{
     puts("Lutfen islem seciniz.");
     scanf("%d", &girdi);
-    while (girdi <= 5 && girdi >= 1)
-    {
-        switch (girdi)
+    switch (girdi)
         {
         case 1: //[1]-> Dosyadan sayilari oku: (1)
 
@@ -49,4 +48,5 @@ int main(int argc, char const *argv[])
             break;
         }
     }
+    while (girdi <= 5 && girdi >= 1);
 }
