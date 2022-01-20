@@ -15,14 +15,16 @@ int main(int argc, char const *argv[])
     //Tanımlamalar
     FILE *sayi1File;
     FILE *sayi2File;
+    FILE *cevap;
     uint8_t *sayi1Array;
     uint8_t *sayi2Array;
+    uint8_t *cevap;
     int sayi1Boyut;
     int sayi2Boyut;
-
     int girdi;
     puts("===============Cok Basamakli Sayilar Ile Islemler=========");
     do{
+    girdi = " ";
     puts("..::Lutfen islem seciniz::..");
     puts("[1] Dosyadan sayilari okuma."
         "\n[2] Okunan sayilari ekrana yazma."
@@ -58,12 +60,17 @@ int main(int argc, char const *argv[])
             }
             break;
         case 2: //[2]-> Okunan sayilari ekrana yaz: (2)
-
+            puts(".:Sayi1.txt dosyasindan okunan sayi:.");
+            arrayYazdir(sayi1Array);
+            puts("======================================");
+            puts(".:Sayi2.txt dosyasindan okunan sayi:.");
+            arrayYazdir(sayi2Array);
+            puts("======================================");
             break;
         case 3: //[+/-]-> Islem seciniz: (+ veya -)
             puts("Islem seciniz.[+/-]");
             char matIslem;
-            scanf("%c",matIslem);
+            getc(matIslem);
             if(matIslem == '-'){
                 //cikarmaIslemi();
             }
@@ -75,14 +82,13 @@ int main(int argc, char const *argv[])
         case 4: //[4]-> Sonucu ekrana yazdır: (4)
 
             break;
-        case 5: //[5]-> Cikis : (5)
-            puts("Program basari ile sonlandiriliyor.");
-            return EXIT_SUCCESS;
+        case 5: /*çıkış komutu!!While kırılır.*/
             break;
         default:
             puts("Hatali islem girisi! Lutfen 1-2-3-4-5 seceneklerinden birini seciniz.");
             break;
         }
-    }
-    while (girdi <= 5 && girdi >= 1);
+    }while (girdi != 5);
+    puts("Program basari ile sonlandirildi.");
+    return EXIT_SUCCESS;
 }
