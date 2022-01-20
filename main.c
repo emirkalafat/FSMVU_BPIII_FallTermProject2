@@ -7,6 +7,7 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include "islemler.h"
 
 int main(int argc, char const *argv[])
@@ -14,13 +15,12 @@ int main(int argc, char const *argv[])
     //Tanımlamalar
     FILE *sayi1File;
     FILE *sayi2File;
-    int *sayi1Array;
-    int *sayi2Array;
+    uint8_t *sayi1Array;
+    uint8_t *sayi2Array;
     int sayi1Boyut;
     int sayi2Boyut;
 
     int girdi;
-    int son = 0;
     puts("===============Cok Basamakli Sayilar Ile Islemler=========");
     do{
     puts("..::Lutfen islem seciniz::..");
@@ -34,11 +34,11 @@ int main(int argc, char const *argv[])
         {
         case 1: //Dosyadan sayilari oku
             if ((sayi1File = fopen("sayi1.txt", "r")) == NULL ){
-                printf( "%s dosyasini acmada sorun yasandi.\n", "sayi1.txt");
+                printf( "%s dosyasini acmada sorun yasandi.\nAna menuye donuluyor...", "sayi1.txt");
                 break;
             }
             else if((sayi2File = fopen("sayi2.txt", "r")) == NULL){
-                printf( "%s dosyasini acmada sorun yasandi.\n", "sayi2.txt");
+                printf( "%s dosyasini acmada sorun yasandi.\nAna menuye donuluyor...", "sayi2.txt");
                 break;
             }
             else{
@@ -46,13 +46,16 @@ int main(int argc, char const *argv[])
                 sayi2Boyut=arrayBoyutHesapla(sayi2File);
                 sayi1Array=arrayOlustur(sayi1Boyut);
                 sayi2Array=arrayOlustur(sayi2Boyut);
-
-
+                printf("%d\n",sayi1Boyut);
+                printf("%d\n",sayi1Boyut);
+                arrayDoldur(sayi1File, sayi1Array);
+                arrayDoldur(sayi2File,sayi2Array);
+                puts("====================");
+                arrayYazdir(sayi1Array);
+                puts("====================");
+                arrayYazdir(sayi2Array);
+                puts("====================");
             }
-
-            
-
-
             break;
         case 2: //[2]-> Okunan sayilari ekrana yaz: (2)
 
