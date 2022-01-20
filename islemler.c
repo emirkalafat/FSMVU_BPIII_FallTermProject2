@@ -7,6 +7,7 @@
 */
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdint.h>
 #include <time.h>
 #include "islemler.h"
 
@@ -21,14 +22,28 @@ int arrayBoyutHesapla(FILE *acilmisDosya){
     rewind(acilmisDosya);
     return count;
 }
-int *arrayOlustur(int matrisBoyutu){
-    int *matris = malloc(matrisBoyutu*sizeof(int));
+uint8_t *arrayOlustur(int matrisBoyutu){
+    int *matris = malloc(matrisBoyutu*sizeof(uint8_t));
     return matris;
+}
+void arrayDoldur(FILE *opeandFile, uint8_t *array){
+    int son = 0;
+    while (fscanf(opeandFile,"%1d",&array[son])!= EOF)
+    {
+        son++;
+    }
+    fclose(opeandFile);
+    array[son] = '\0';
+}
+void arrayYazdir(uint8_t *array){
+    int i = 0;
+    for (i = 0; array[i] != '\0'; i++)
+        printf("%d", array[i]);
 }
 int toplamaIslemi(int *sayi1,int *sayi2,int boyut1, int boyut2){
     int elde = 0;
     if(boyut1<boyut2){
-        
+
     }
     else{
 

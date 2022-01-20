@@ -9,7 +9,9 @@
 #define _ISLEMLER_
 
 int arrayBoyutHesapla(FILE *acilmisDosya);
-int *arrayOlustur(int matrisBoyutu);
+uint8_t *arrayOlustur(int matrisBoyutu);
+void arrayDoldur(FILE *file, uint8_t *array);
+void arrayYazdir(uint8_t *array);
 int toplamaIslemi(int *sayi1,int *sayi2,int boyut1, int boyut2);
 int cikarmaIslemi(int *sayi1,int *sayi2,int boyut1, int boyut2);
 #endif
