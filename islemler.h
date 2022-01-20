@@ -8,11 +8,8 @@
 #ifndef _ISLEMLER_
 #define _ISLEMLER_
 
-void hello();
-FILE *dosyaAc(FILE *file,char *dosyaAdi);
-void matrisYazdir(int *matris,int boyut);
-int *matrisOlustur(int matrisBoyutu);
-void dosyadanOku();
-void yazdir();
-
+int arrayBoyutHesapla(FILE *acilmisDosya);
+int *arrayOlustur(int matrisBoyutu);
+int toplamaIslemi(int *sayi1,int *sayi2,int boyut1, int boyut2);
+int cikarmaIslemi(int *sayi1,int *sayi2,int boyut1, int boyut2);
 #endif

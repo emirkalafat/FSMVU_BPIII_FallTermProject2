@@ -10,33 +10,30 @@
 #include <time.h>
 #include "islemler.h"
 
-void hello(){
-    printf("hello");
-}
-void dosyadanOku(){
-
-}
-void yazdir(){
-
-}
-FILE *dosyaAc(FILE *file,char *dosyaAdi){
-    if ((file = fopen(dosyaAdi, "r")) == NULL)
+int arrayBoyutHesapla(FILE *acilmisDosya){
+    int count=0;
+    char ch;
+    do
     {
-        fprintf(stderr, "\nError open \"%s\" file\n",dosyaAdi);
-        exit(EXIT_FAILURE);
-    }
-    else return file;
+        ch = fgetc(acilmisDosya);
+        count++;
+    }while (ch != EOF);
+    rewind(acilmisDosya);
+    return count;
 }
-void matrisYazdir(int *matris,int boyut){
-    //bu fonksiyon verilen matrisin elemanlarını düzün sırada yazdırmayı sağlıyor.
-    puts("*************************");
-    for (int i = 0; i < boyut; i++)
-    {
-        printf("%d ",*(matris+i));
-    }
-}
-int *matrisOlustur(int matrisBoyutu){
-    //bu fonksiyon heap alanında matris için uygun boyutta yer ayırıp sışarı yolluyor.
+int *arrayOlustur(int matrisBoyutu){
     int *matris = malloc(matrisBoyutu*sizeof(int));
     return matris;
+}
+int toplamaIslemi(int *sayi1,int *sayi2,int boyut1, int boyut2){
+    int elde = 0;
+    if(boyut1<boyut2){
+        
+    }
+    else{
+
+    }
+}
+int cikarmaIslemi(int *sayi1,int *sayi2,int boyut1, int boyut2){
+
 }
