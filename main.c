@@ -30,7 +30,7 @@ int main(int argc, char const *argv[])
     puts("[1] Dosyadan sayilari oku."
         "\n[2] Okunan sayilari ekrana yazma."
         "\n[3] Toplama islemini gerceklestir."
-        "\n[4] Cıkarma islemini gerceklestir."
+        "\n[4] Cikarma islemini gerceklestir."
         "\n[4] Sonucu ekrana yazdir."
         "\n[5] Cikis. ");
     scanf("%d", &girdi);
@@ -66,7 +66,7 @@ int main(int argc, char const *argv[])
             puts("======================================");
             break;
         case 3: //Toplama İşlemi.
-            cevapArray = toplamaIslemi(sayi1Array,sayi1Boyut,sayi2Array,sayi2Boyut);
+            cevapArray = arrayOlustur(buyukBoyutuDondur(sayi1Boyut,sayi2Boyut));
             
             break;
         case 4:

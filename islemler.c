@@ -40,11 +40,13 @@ void arrayYazdir(uint8_t *array){
     for (i = 0; array[i] != '\0'; i++)
         printf("%d", array[i]);
 }
-uint8_t *toplamaIslemi(uint8_t *sayi1,uint8_t *sayi2,int boyut1, int boyut2){
+int buyukBoyutuDondur(int boyut1,int boyut2){
+    return boyut1>boyut2 ? boyut1 : boyut2;
+}
+void toplamaIslemi(uint8_t *sayi1,uint8_t *sayi2,int boyut1, int boyut2,uint8_t *sonuc){
     int elde = 0;
     int a=boyut1-1,b=boyut2-1;
     if(boyut1>boyut2){
-        uint8_t *sonuc = arrayOlustur(boyut1+1);
         while (a>=0)
         {
             if (b<-1)
@@ -62,28 +64,25 @@ uint8_t *toplamaIslemi(uint8_t *sayi1,uint8_t *sayi2,int boyut1, int boyut2){
             b--;
         }
         sonuc[0]=elde;
-        return sonuc;
     }
     else{
-        uint8_t *sonuc = arrayOlustur(boyut2+1);
         while (b>=0)
         {
-            if (a<-1)
+            if (b<-1)
             {
                 sonuc[b] = (*sayi2+b);
             }
-            if(a=-1){
+            if(b=-1){
                 sonuc[b]=(*sayi2+b)+elde;
             }
             else{
-                sonuc[a] = ((*sayi1+a)+(*sayi2+b)+elde)%10;
+                sonuc[b] = ((*sayi1+a)+(*sayi2+b)+elde)%10;
                 elde = ((*sayi1+a)+(*sayi2+b)+elde)/10;
             }
             a--;
             b--;
         }
         sonuc[0]=elde;
-        return sonuc;
     }
 }
 int cikarmaIslemi(int *sayi1,int *sayi2,int boyut1, int boyut2){
