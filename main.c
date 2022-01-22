@@ -18,18 +18,20 @@ int main(int argc, char const *argv[])
     FILE *cevap;
     uint8_t *sayi1Array;
     uint8_t *sayi2Array;
-    uint8_t *cevap;
+    uint8_t *cevapArray;
     int sayi1Boyut;
     int sayi2Boyut;
     int girdi;
+    char matIslem;
     puts("===============Cok Basamakli Sayilar Ile Islemler=========");
     do{
     girdi = " ";
     puts("..::Lutfen islem seciniz::..");
-    puts("[1] Dosyadan sayilari okuma."
+    puts("[1] Dosyadan sayilari oku."
         "\n[2] Okunan sayilari ekrana yazma."
-        "\n[3] Matematiksel islem secimi."
-        "\n[4] Sonucu ekrana yazdirma."
+        "\n[3] Toplama islemini gerceklestir."
+        "\n[4] Cıkarma islemini gerceklestir."
+        "\n[4] Sonucu ekrana yazdir."
         "\n[5] Cikis. ");
     scanf("%d", &girdi);
     switch (girdi)
@@ -49,7 +51,7 @@ int main(int argc, char const *argv[])
                 sayi1Array=arrayOlustur(sayi1Boyut);
                 sayi2Array=arrayOlustur(sayi2Boyut);
                 printf("%d\n",sayi1Boyut);
-                printf("%d\n",sayi1Boyut);
+                printf("%d\n",sayi2Boyut);
                 arrayDoldur(sayi1File, sayi1Array);
                 arrayDoldur(sayi2File,sayi2Array);
                 
@@ -63,28 +65,27 @@ int main(int argc, char const *argv[])
             arrayYazdir(sayi2Array);
             puts("======================================");
             break;
-        case 3: //[+/-]-> Islem seciniz: (+ veya -)
-            puts("Islem seciniz.[+/-]");
-            char matIslem;
-            getc(matIslem);
-            if(matIslem == '-'){
-                //TODO: cikarmaIslemi();
-            }
-            else if(matIslem == '+'){
-                //TODO: toplamaIslemi();
-            }
-            else puts(" + veya - sembollerini kullaniniz.");
+        case 3: //Toplama İşlemi.
+            cevapArray = toplamaIslemi(sayi1Array,sayi1Boyut,sayi2Array,sayi2Boyut);
+            
             break;
-        case 4: //[4]-> Sonucu ekrana yazdır: (4)
-                //TODO: sonuç işlemini yaz
+        case 4:
+            //TODO: cikarmaIslemi();
+            puts("HAZIR DEGIL");
+        case 5: //Sonucu ekrana yazdır:
+                arrayYazdir(cevap);
             break;
-        case 5: //çıkış komutu!!While kırılır.
+        case 6: //çıkış komutu!!While kırılır.
             break;
         default:
-            puts("Hatali islem girisi! Lutfen 1-2-3-4-5 seceneklerinden birini seciniz.");
+            puts("Hatali islem girisi! Lutfen 1-2-3-4-5-6 seceneklerinden birini seciniz.");
             break;
         }
     }while (girdi != 5);
+    free(sayi1Array);
+    free(sayi2Array);
+    fclose(sayi1File);
+    fclose(sayi2File);
     puts("Program basari ile sonlandirildi.");
     return EXIT_SUCCESS;
 }

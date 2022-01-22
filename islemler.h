@@ -12,6 +12,6 @@ int arrayBoyutHesapla(FILE *acilmisDosya);
 uint8_t *arrayOlustur(int matrisBoyutu);
 void arrayDoldur(FILE *file, uint8_t *array);
 void arrayYazdir(uint8_t *array);
-int toplamaIslemi(int *sayi1,int *sayi2,int boyut1, int boyut2);
+uint8_t *toplamaIslemi(uint8_t *sayi1,uint8_t *sayi2,int boyut1, int boyut2);
 int cikarmaIslemi(int *sayi1,int *sayi2,int boyut1, int boyut2);
 #endif
