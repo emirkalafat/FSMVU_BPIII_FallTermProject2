@@ -52,11 +52,7 @@ int main(int argc, char const *argv[])
                 printf("%d\n",sayi1Boyut);
                 arrayDoldur(sayi1File, sayi1Array);
                 arrayDoldur(sayi2File,sayi2Array);
-                puts("====================");
-                arrayYazdir(sayi1Array);
-                puts("====================");
-                arrayYazdir(sayi2Array);
-                puts("====================");
+                
             }
             break;
         case 2: //[2]-> Okunan sayilari ekrana yaz: (2)
@@ -72,17 +68,17 @@ int main(int argc, char const *argv[])
             char matIslem;
             getc(matIslem);
             if(matIslem == '-'){
-                //cikarmaIslemi();
+                //TODO: cikarmaIslemi();
             }
             else if(matIslem == '+'){
-                //toplamaIslemi();
+                //TODO: toplamaIslemi();
             }
             else puts(" + veya - sembollerini kullaniniz.");
             break;
         case 4: //[4]-> Sonucu ekrana yazdır: (4)
-
+                //TODO: sonuç işlemini yaz
             break;
-        case 5: /*çıkış komutu!!While kırılır.*/
+        case 5: //çıkış komutu!!While kırılır.
             break;
         default:
             puts("Hatali islem girisi! Lutfen 1-2-3-4-5 seceneklerinden birini seciniz.");
