@@ -16,42 +16,45 @@ int main(int argc, char const *argv[])
     FILE *sayi1File;
     FILE *sayi2File;
     FILE *cevap;
+    char *char1Array;
+    char *char2Array;
     uint8_t *sayi1Array;
     uint8_t *sayi2Array;
     uint8_t *cevapArray;
     int sayi1Boyut;
     int sayi2Boyut;
     int girdi;
-    char matIslem;
     puts("===============Cok Basamakli Sayilar Ile Islemler=========");
     do{
-    girdi = " ";
     puts("..::Lutfen islem seciniz::..");
     puts("[1] Dosyadan sayilari oku."
         "\n[2] Okunan sayilari ekrana yazma."
         "\n[3] Toplama islemini gerceklestir."
         "\n[4] Cikarma islemini gerceklestir."
-        "\n[4] Sonucu ekrana yazdir."
-        "\n[5] Cikis. ");
+        "\n[5] Sonucu ekrana yazdir."
+        "\n[6] Cikis. ");
     scanf("%d", &girdi);
     switch (girdi)
         {
         case 1: //Dosyadan sayilari oku
-            if ((sayi1File = fopen("sayi1.txt", "r")) == NULL ){
-                printf( "%s dosyasini acmada sorun yasandi.\nAna menuye donuluyor...", "sayi1.txt");
+            if ((sayi1File = fopen("test1.txt", "r")) == NULL ){
+                printf( "%s dosyasini acmada sorun yasandi.\nAna menuye donuluyor...", "test1.txt");
                 break;
             }
-            else if((sayi2File = fopen("sayi2.txt", "r")) == NULL){
-                printf( "%s dosyasini acmada sorun yasandi.\nAna menuye donuluyor...", "sayi2.txt");
+            else if((sayi2File = fopen("test2.txt", "r")) == NULL){
+                printf( "%s dosyasini acmada sorun yasandi.\nAna menuye donuluyor...", "test2.txt");
                 break;
             }
             else{
                 sayi1Boyut=arrayBoyutHesapla(sayi1File);
                 sayi2Boyut=arrayBoyutHesapla(sayi2File);
                 sayi1Array=arrayOlustur(sayi1Boyut);
+                char1Array=arrayOlustur(sayi1Boyut);
                 sayi2Array=arrayOlustur(sayi2Boyut);
+                char2Array=arrayOlustur(sayi2Boyut);
                 printf("%d\n",sayi1Boyut);
                 printf("%d\n",sayi2Boyut);
+                char
                 arrayDoldur(sayi1File, sayi1Array);
                 arrayDoldur(sayi2File,sayi2Array);
                 
@@ -66,14 +69,22 @@ int main(int argc, char const *argv[])
             puts("======================================");
             break;
         case 3: //Toplama İşlemi.
-            cevapArray = arrayOlustur(buyukBoyutuDondur(sayi1Boyut,sayi2Boyut));
-            
+            cevapArray = arrayOlustur(buyukBoyutuDondur(sayi1Boyut,sayi2Boyut)+1);
+            toplamaIslemi(sayi1Array,sayi2Array,sayi1Boyut,sayi2Boyut,cevapArray);
             break;
         case 4:
-            //TODO: cikarmaIslemi();
+            printf("%d\n",12%10);
             puts("HAZIR DEGIL");
         case 5: //Sonucu ekrana yazdır:
-                arrayYazdir(cevap);
+            if ((cevap = fopen("sonuclar.txt", "w")) == NULL ){
+            printf( "%s dosyasini acmada sorun yasandi.\nAna menuye donuluyor...", "sonuclar.txt");
+            break;
+            }
+            int n;
+            for(n=0;n<buyukBoyutuDondur(sayi1Boyut,sayi2Boyut)+1;n++) {
+            fprintf(cevap,"%d",cevapArray[n]);
+            }
+            //arrayBoyutuIleYazdir(cevapArray,buyukBoyutuDondur(sayi1Boyut,sayi2Boyut)+1);
             break;
         case 6: //çıkış komutu!!While kırılır.
             break;
@@ -81,11 +92,9 @@ int main(int argc, char const *argv[])
             puts("Hatali islem girisi! Lutfen 1-2-3-4-5-6 seceneklerinden birini seciniz.");
             break;
         }
-    }while (girdi != 5);
-    free(sayi1Array);
-    free(sayi2Array);
-    fclose(sayi1File);
-    fclose(sayi2File);
+    }while (girdi != 6);
+    //free(sayi1Array);
+    //free(sayi2Array);
     puts("Program basari ile sonlandirildi.");
     return EXIT_SUCCESS;
 }
