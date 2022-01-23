@@ -10,7 +10,8 @@
 #include <ctype.h>
 #include <stdint.h>
 #include "islemler.h"
-void dosyaKapa(FILE *dosya){
+void dosyaKapa(FILE *dosya)
+{
     fclose(dosya);
 }
 int arrayBoyutHesapla(FILE *acilmisDosya)
@@ -28,8 +29,9 @@ int arrayBoyutHesapla(FILE *acilmisDosya)
     rewind(acilmisDosya);
     return count - 1;
 }
-uint8_t *int8ArrayOlustur(int arrayBoyutu){
-    uint8_t *array=malloc(arrayBoyutu*sizeof(uint8_t));
+uint8_t *int8ArrayOlustur(int arrayBoyutu)
+{
+    uint8_t *array = malloc(arrayBoyutu * sizeof(uint8_t));
     return array;
 }
 void arrayDoldur(FILE *acilmisDosya, uint8_t *sayiArray)
@@ -42,8 +44,8 @@ void arrayDoldur(FILE *acilmisDosya, uint8_t *sayiArray)
         if ((c == '\0'))
             continue; // array de space olusmamasi için
         else if (c == '\n')
-            continue; // array e enter girmemsi icin
-        else if (c >= '0' && c <= '9')//dosyadan gelen deger sayi ise arraye yazilir
+            continue;                  // array e enter girmemsi icin
+        else if (c >= '0' && c <= '9') // dosyadan gelen deger sayi ise arraye yazilir
         {
             int sayi = (c - '0');
             *(sayiArray + i) = sayi;
@@ -52,92 +54,93 @@ void arrayDoldur(FILE *acilmisDosya, uint8_t *sayiArray)
     }
     rewind(acilmisDosya);
 }
+
 void arrayYazdir(uint8_t *array, int boyut)
 {
     int i = 0;
     for (i = 0; i < boyut; i++)
-        printf("%d ", *(array+i));
+        printf("%d ", *(array + i));
     puts("");
-}
-int buyukBoyutuDondur(int boyut1, int boyut2)
-{
-    return boyut1 >= boyut2 ? boyut1 : boyut2;
 }
 void toplamaIslemi(uint8_t *sayi1, uint8_t *sayi2, int sayi1Boyut, int sayi2Boyut, uint8_t *cevap, int cevapBoyut)
 {
-    uint8_t *yeniSayiArray;
-    if(buyukBoyutuDondur(sayi1Boyut,sayi2Boyut)==sayi1Boyut){
-        yeniSayiArray = malloc(sayi1Boyut*sizeof(uint8_t));
-        int j = sayi1Boyut;
-        for (size_t i = sayi2Boyut -1; i > 0; i--)
-        {
-            *(yeniSayiArray+j)= *(sayi2+i);
-            j--;
+    int k = cevapBoyut - 1; // toplama işlemi için birler basamağından başlıyoruz.
+    int n = sayi1Boyut - 1;
+    int m = sayi2Boyut - 1; 
+    while (k > 0)
+    { // cevap arrayinin ilk indexine kadar dönüyoruz.
+        *cevap = 0;
+        
+        if(m>=0){
+        *(cevap + k) = *(sayi1 + n) + *(sayi2 + m);
+        if(*(cevap + k) > 9 ){
+            *(sayi1 + n - 1) += 1;
+            *(cevap + k) -= 10; 
         }
-    }
-    else if(buyukBoyutuDondur(sayi1Boyut,sayi2Boyut)==sayi2Boyut){
-        yeniSayiArray = malloc(sayi2Boyut*sizeof(uint8_t));
-        int j = sayi2Boyut;
-        for (size_t i = sayi1Boyut -1; i > 0; i--)
-        {
-            *(yeniSayiArray+j)= *(sayi1+i);
-            j--;
+        else{
+            *(cevap + k) = *(sayi1 + n);
         }
-    }
-    int n = cevapBoyut - 1; // toplama işlemi için birler basamağından başlıyoruz.
-    while(n>=0){//cevap arrayinin ilk indexine kadar dönüyoruz.
-        if((*(sayi1+n) + *(yeniSayiArray+n)) > 9){
-            *(cevap + n - 1) =  1;
-            *(cevap + n) += *((sayi1 + n) + *(yeniSayiArray + n))%10;////////////////
+        if(*sayi1>9){
+            *cevap = 1;
         }
-        else
-            *(cevap + n) += *(sayi1 + n) + *(yeniSayiArray + n);
-
+        k--;
         n--;
+        m--;
+    }
+    }
+    
 }
-void cikarmaIslemi(uint8_t *sayi1, uint8_t *sayi2, int sayi1Boyut, int sayi2Boyut, uint8_t *cevapArray, int cevapBoyut){
-    int n = cevapBoyut - 1; // toplama işlemi içib birler basamağından başlıyoruz.
-    int i = sayi1Boyut - 1; // birinci arrayin index sayısı.
-    int j = sayi2Boyut - 1; //ikinci arrayin index sayısı.
-    int cevap = 0;
-    int elde = 0;
-    while(cevapBoyut>=0){
-        if(j<=0){
-            cevap = *(sayi1+i) - *(sayi2+i) - elde ;
-            if(cevap < 0){
-                cevap *= -1;
-                elde = 1;
+void cikarmaIslemi(uint8_t *sayi1, uint8_t *sayi2, int sayi1Boyut, int sayi2Boyut, uint8_t *cevap, int cevapBoyut){
+    int k = cevapBoyut - 1; // toplama işlemi için birler basamağından başlıyoruz.
+    int n = sayi1Boyut - 1;
+    int m = sayi2Boyut - 1; 
+    int gecici;
+    while (k > 0)
+    { // cevap arrayinin ilk indexine kadar dönüyoruz.
+        *cevap = 0;
+        
+        if(m>=0){
+        if(*(sayi1+n) < *(sayi2+m)){
+            *(sayi1+n) += 10;
+            gecici = *(sayi1 + n) - *(sayi2 + m);
+            int geri = 1;
+            while(*(sayi1+n-geri)==0){
+                *(sayi1+n-geri)=9;
+                geri++; 
             }
-            else
-                elde = 0;
-            cevapArray[n] = cevap;
+            *(sayi1+n-geri) -= 1;
+            
         }
-        else if (j==-1){
-            cevap = *(sayi1+i+1) - *(sayi2+i+1) - elde ;
-            if(cevap<0) 
-                cevapArray[n] = *(sayi1+i) - 1 ;
-            else 
-                cevapArray[n] = *(sayi1+i);
+        else{
+            gecici = *(sayi1 + n) - *(sayi2 + m); 
         }
-        else 
-            cevapArray[n] = *(sayi1+i);
+        *(cevap + k) = gecici;
+        }
+        else{
+            *(cevap + k) = *(sayi1 + n);
+        }
+        
+        k--;
+        n--;
+        m--;
+    }
+}
+    
 
-        cevapBoyut--;
-        i--;
-        j--;
-    }   
+// renkli çıktı kodları
+void red()
+{
+    printf("\033[0;31m");
 }
-
-//renkli çıktı kodları
-void red() {
-  printf("\033[0;31m");
+void green()
+{
+    printf("\033[0;32m");
 }
-void green() {
-  printf("\033[0;32m");
-}
-void cyan(){
+void cyan()
+{
     printf("\033[0;36m");
 }
-void resetRenk() {
-  printf("\033[0m");
+void resetRenk()
+{
+    printf("\033[0m");
 }
