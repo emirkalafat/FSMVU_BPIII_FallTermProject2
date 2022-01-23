@@ -11,6 +11,7 @@
 int arrayBoyutHesapla(FILE *acilmisDosya);
 void charToUint(char *charArray,uint8_t *sayiArray);
 uint8_t *arrayOlustur(int matrisBoyutu);
+char *charArrayOlustur(int arrayBoyutu);
 void arrayDoldur(FILE *file, char *array);
 void arrayYazdir(uint8_t *array);
 void arrayBoyutuIleYazdir(uint8_t *array, int boyut);

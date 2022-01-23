@@ -49,15 +49,15 @@ int main(int argc, char const *argv[])
                 sayi1Boyut=arrayBoyutHesapla(sayi1File);
                 sayi2Boyut=arrayBoyutHesapla(sayi2File);
                 sayi1Array=arrayOlustur(sayi1Boyut);
-                char1Array=arrayOlustur(sayi1Boyut);
+                char1Array=charArrayOlustur(sayi1Boyut);
                 sayi2Array=arrayOlustur(sayi2Boyut);
-                char2Array=arrayOlustur(sayi2Boyut);
-                printf("%d\n",sayi1Boyut);
-                printf("%d\n",sayi2Boyut);
-                char
-                arrayDoldur(sayi1File, sayi1Array);
-                arrayDoldur(sayi2File,sayi2Array);
-                
+                char2Array=charArrayOlustur(sayi2Boyut);
+                printf("Birinci sayinin boyutu: %d\n",sayi1Boyut);
+                printf("Ikinci sayinin boyutu: %d\n",sayi2Boyut);
+                arrayDoldur(sayi1File, char1Array);
+                arrayDoldur(sayi2File,char2Array);
+                charToUint(char1Array,sayi1Array);
+                charToUint(char2Array,sayi2Array);
             }
             break;
         case 2: //[2]-> Okunan sayilari ekrana yaz: (2)
@@ -73,7 +73,7 @@ int main(int argc, char const *argv[])
             toplamaIslemi(sayi1Array,sayi2Array,sayi1Boyut,sayi2Boyut,cevapArray);
             break;
         case 4:
-            printf("%d\n",12%10);
+            printf("%d\n",(uint8_t)'0');
             puts("HAZIR DEGIL");
         case 5: //Sonucu ekrana yazdır:
             if ((cevap = fopen("sonuclar.txt", "w")) == NULL ){

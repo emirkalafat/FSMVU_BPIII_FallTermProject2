@@ -1,4 +1,4 @@
-/*
+/**
 * @file islemler.c
 * @description operations with files islemler.c file
 * @assignment Computer Engineering III Fallterm Project II
@@ -27,16 +27,19 @@ int arrayBoyutHesapla(FILE *acilmisDosya){
 void charToUint(char *charArray,uint8_t *sayiArray){
     int i = 0;
     for (i = 0; charArray[i] != '\0'; i++)
-        sayiArray[i]=atoi(charArray[i]);
-    
+        sayiArray[i]=((uint8_t)charArray[i])-48;
 }
 uint8_t *arrayOlustur(int arrayBoyutu){
     uint8_t *array = malloc(arrayBoyutu*sizeof(uint8_t));
     return array;
 }
+char *charArrayOlustur(int arrayBoyutu){
+    char *array = malloc(arrayBoyutu*sizeof(char));
+    return array;
+}
 void arrayDoldur(FILE *acilmisDosya,char *array){
     int son = 0;
-    while (fscanf(acilmisDosya,"%c",&array[son])!= EOF)
+    while (fgetc(acilmisDosya)!= EOF)
     {
         son++;
     }
