@@ -88,7 +88,7 @@ void toplamaIslemi(uint8_t *sayi1, uint8_t *sayi2, int sayi1Boyut, int sayi2Boyu
     while(n>=0){//cevap arrayinin ilk indexine kadar dönüyoruz.
         if((*(sayi1+n) + *(yeniSayiArray+n)) > 9){
             *(cevap + n - 1) =  1;
-            *(cevap + n) += *((sayi1 + n) + *(yeniSayiArray + n))%10;
+            *(cevap + n) += *((sayi1 + n) + *(yeniSayiArray + n))%10;////////////////
         }
         else
             *(cevap + n) += *(sayi1 + n) + *(yeniSayiArray + n);
