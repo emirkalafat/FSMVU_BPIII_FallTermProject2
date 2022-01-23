@@ -40,12 +40,12 @@ int main(int argc, char const *argv[])
     switch (girdi)
         {
         case 1: //Dosyadan sayilari oku
-            if ((sayi1File = fopen("test1.txt", "r")) == NULL ){
+            if ((sayi1File = fopen("sayi1.txt", "r")) == NULL ){
                 red();
                 printf( "%s dosyasini acmada sorun yasandi.\nAna menuye donuluyor...", "test1.txt");
                 break;
             }
-            else if((sayi2File = fopen("test2.txt", "r")) == NULL){
+            else if((sayi2File = fopen("sayi2.txt", "r")) == NULL){
                 red();
                 printf( "%s dosyasini acmada sorun yasandi.\nAna menuye donuluyor...", "test2.txt");
                 break;
@@ -73,8 +73,8 @@ int main(int argc, char const *argv[])
             puts("======================================");
             cyan();
             puts(".:Sayi2.txt dosyasindan okunan sayi:.");
+            resetRenk();
             arrayYazdir(sayi2Array,sayi2Boyut);
-            reset();
             puts("======================================");
             break;
         case 3: //Toplama İşlemi.

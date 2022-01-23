@@ -56,73 +56,79 @@ void arrayYazdir(uint8_t *array, int boyut)
 {
     int i = 0;
     for (i = 0; i < boyut; i++)
-        printf("%d ", *(array + i));
+        printf("%d", *(array + i));
     puts("");
 }
 void toplamaIslemi(uint8_t *sayi1, uint8_t *sayi2, int sayi1Boyut, int sayi2Boyut, uint8_t *cevap, int cevapBoyut)
 {
     int k = cevapBoyut - 1; // toplama işlemi için birler basamağından başlıyoruz.
     int n = sayi1Boyut - 1;
-    int m = sayi2Boyut - 1; 
+    int m = sayi2Boyut - 1;
     while (k > 0)
     { // cevap arrayinin ilk indexine kadar dönüyoruz.
         *cevap = 0;
-        
-        if(m>=0){
-        *(cevap + k) = *(sayi1 + n) + *(sayi2 + m);
-        if(*(cevap + k) > 9 ){
-            *(sayi1 + n - 1) += 1;
-            *(cevap + k) -= 10; 
+        if (m >= 0)
+        {
+            *(cevap + k) = *(sayi1 + n) + *(sayi2 + m);
+            if (*(cevap + k) > 9)
+            {
+                *(sayi1 + n - 1) += 1;
+                *(cevap + k) -= 10;
+            }
         }
-        else{
+        else
+        {
             *(cevap + k) = *(sayi1 + n);
-        }
-        if(*sayi1>9){
-            *cevap = 1;
         }
         k--;
         n--;
         m--;
+        if (*sayi1 > 9)
+        {
+            *cevap = 1;
+        }
     }
-    }
-    
 }
-void cikarmaIslemi(uint8_t *sayi1, uint8_t *sayi2, int sayi1Boyut, int sayi2Boyut, uint8_t *cevap, int cevapBoyut){
+void cikarmaIslemi(uint8_t *sayi1, uint8_t *sayi2, int sayi1Boyut, int sayi2Boyut, uint8_t *cevap, int cevapBoyut)
+{
     int k = cevapBoyut - 1; // toplama işlemi için birler basamağından başlıyoruz.
     int n = sayi1Boyut - 1;
-    int m = sayi2Boyut - 1; 
+    int m = sayi2Boyut - 1;
     int gecici;
     while (k > 0)
     { // cevap arrayinin ilk indexine kadar dönüyoruz.
         *cevap = 0;
-        
-        if(m>=0){
-        if(*(sayi1+n) < *(sayi2+m)){
-            *(sayi1+n) += 10;
-            gecici = *(sayi1 + n) - *(sayi2 + m);
-            int geri = 1;
-            while(*(sayi1+n-geri)==0){
-                *(sayi1+n-geri)=9;
-                geri++; 
+
+        if (m >= 0)
+        {
+            if (*(sayi1 + n) < *(sayi2 + m))
+            {
+                *(sayi1 + n) += 10;
+                gecici = *(sayi1 + n) - *(sayi2 + m);
+                int geri = 1;
+                while (*(sayi1 + n - geri) == 0)
+                {
+                    *(sayi1 + n - geri) = 9;
+                    geri++;
+                }
+                *(sayi1 + n - geri) -= 1;
             }
-            *(sayi1+n-geri) -= 1;
-            
+            else
+            {
+                gecici = *(sayi1 + n) - *(sayi2 + m);
+            }
+            *(cevap + k) = gecici;
         }
-        else{
-            gecici = *(sayi1 + n) - *(sayi2 + m); 
-        }
-        *(cevap + k) = gecici;
-        }
-        else{
+        else
+        {
             *(cevap + k) = *(sayi1 + n);
         }
-        
+
         k--;
         n--;
         m--;
     }
 }
-    
 
 // renkli çıktı kodları
 void red()
