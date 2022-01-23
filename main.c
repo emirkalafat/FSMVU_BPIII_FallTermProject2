@@ -1,4 +1,4 @@
-/*
+/**
  * @file main.h
  * @description operations with files main.c file
  * @assignment Computer Engineering III Fallterm Project II
@@ -24,7 +24,7 @@ int main(int argc, char const *argv[])
     int cevapBoyut;
     int girdi;
     cyan();
-    puts("===============Cok Basamakli Sayilar Ile Islemler=========");
+    puts("===============Cok Basamakli Sayilar Ile Islemler=============");
     do{
     resetRenk();
     cyan();

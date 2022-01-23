@@ -1,4 +1,4 @@
-/*
+/**
  * @file islemler.h
  * @description operations with files islemler.h file
  * @assignment Computer Engineering III Fallterm Project II
@@ -7,14 +7,13 @@
  */
 #ifndef _ISLEMLER_
 #define _ISLEMLER_
-void dosyaKapa(FILE *dosya);
+
 int arrayBoyutHesapla(FILE *acilmisDosya);
 uint8_t *int8ArrayOlustur(int matrisBoyutu);
 void arrayDoldur(FILE *acilmisDosya, uint8_t *sayiArray);
 void arrayYazdir(uint8_t *array, int boyut);
 void toplamaIslemi(uint8_t *sayi1, uint8_t *sayi2, int sayi1Boyut, int sayi2Boyut, uint8_t *cevap, int cevapBoyut);
 void cikarmaIslemi(uint8_t *sayi1, uint8_t *sayi2, int sayi1Boyut, int sayi2Boyut, uint8_t *cevap, int cevapBoyut);
-
 //renki çıktı kodları
 void red();
 void green();

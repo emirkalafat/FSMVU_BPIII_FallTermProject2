@@ -10,10 +10,7 @@
 #include <ctype.h>
 #include <stdint.h>
 #include "islemler.h"
-void dosyaKapa(FILE *dosya)
-{
-    fclose(dosya);
-}
+
 int arrayBoyutHesapla(FILE *acilmisDosya)
 {
     int count = 0;
