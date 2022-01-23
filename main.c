@@ -15,7 +15,7 @@ int main(int argc, char const *argv[])
     //Tanımlamalar
     FILE *sayi1File;
     FILE *sayi2File;
-    FILE *cevap;
+    FILE *cevapFile;
     uint8_t *sayi1Array;
     uint8_t *sayi2Array;
     uint8_t *cevapArray;
@@ -30,7 +30,7 @@ int main(int argc, char const *argv[])
         "\n[2] Okunan sayilari ekrana yazma."
         "\n[3] Toplama islemini gerceklestir."
         "\n[4] Cikarma islemini gerceklestir."
-        "\n[5] Sonucu ekrana yazdir."
+        "\n[5] Sonucu sonuc dosyasina yazdir."
         "\n[6] Cikis. ");
     scanf("%d", &girdi);
     switch (girdi)
@@ -50,6 +50,7 @@ int main(int argc, char const *argv[])
                 cevapBoyut=buyukBoyutuDondur(sayi1Boyut,sayi2Boyut)+1;
                 sayi1Array=int8ArrayOlustur(sayi1Boyut);
                 sayi2Array=int8ArrayOlustur(sayi2Boyut);
+                cevapArray = int8ArrayOlustur(cevapBoyut);
 
                 printf("Birinci sayinin boyutu: %d\n",sayi1Boyut);
                 printf("Ikinci sayinin boyutu: %d\n",sayi2Boyut);
@@ -68,23 +69,24 @@ int main(int argc, char const *argv[])
             puts("======================================");
             break;
         case 3: //Toplama İşlemi.
-            cevapArray = int8ArrayOlustur(cevapBoyut);
             toplamaIslemi(sayi1Array,sayi2Array,sayi1Boyut,sayi2Boyut,cevapArray,cevapBoyut);
             arrayYazdir(cevapArray,cevapBoyut);
             break;
         case 4: //şimdilik test seçenği
-            printf("%d\n",(uint8_t)'0');
-            puts("HAZIR DEGIL");
-        case 5: //Sonucu ekrana yazdır:
-            if ((cevap = fopen("sonuclar.txt", "w")) == NULL ){
-            printf( "%s dosyasini acmada sorun yasandi.\nAna menuye donuluyor...", "sonuclar.txt");
-            break;
+            cikarmaIslemi(sayi1Array,sayi2Array,sayi1Boyut,sayi2Boyut,cevapArray,cevapBoyut);
+            arrayYazdir(cevapArray,cevapBoyut);
+
+        case 5: //Sonucu dosyaya yazdır:
+            if ((cevapFile = fopen("sonuclar.txt", "w")) == NULL ){
+                printf( "%s dosyasini acmada sorun yasandi.\nAna menuye donuluyor...", "sonuclar.txt");
+                break;
             }
+
             int n;
-            for(n=0;n<buyukBoyutuDondur(sayi1Boyut,sayi2Boyut)+1;n++) {
-            fprintf(cevap,"%d",cevapArray[n]);
+            for(n=0;n<cevapBoyut;n++) {
+                fprintf(cevapFile,"%d",cevapArray[n]);
             }
-            //arrayBoyutuIleYazdir(cevapArray,buyukBoyutuDondur(sayi1Boyut,sayi2Boyut)+1);
+            puts("Islem tamam.");
             break;
         case 6: //çıkış komutu!!While kırılır.
             break;

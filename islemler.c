@@ -63,9 +63,69 @@ int buyukBoyutuDondur(int boyut1, int boyut2)
 {
     return boyut1 >= boyut2 ? boyut1 : boyut2;
 }
-void toplamaIslemi()
+void toplamaIslemi(uint8_t *sayi1, uint8_t *sayi2, int sayi1Boyut, int sayi2Boyut, uint8_t *cevap, int cevapBoyut)
 {
+    uint8_t *yeniSayiArray;
+    if(buyukBoyutuDondur(sayi1Boyut,sayi2Boyut)==sayi1Boyut){
+        yeniSayiArray = malloc(sayi1Boyut*sizeof(uint8_t));
+        int j = sayi1Boyut;
+        for (size_t i = sayi2Boyut -1; i > 0; i--)
+        {
+            *(yeniSayiArray+j)= *(sayi2+i);
+            j--;
+        }
+    }
+    else if(buyukBoyutuDondur(sayi1Boyut,sayi2Boyut)==sayi2Boyut){
+        yeniSayiArray = malloc(sayi2Boyut*sizeof(uint8_t));
+        int j = sayi2Boyut;
+        for (size_t i = sayi1Boyut -1; i > 0; i--)
+        {
+            *(yeniSayiArray+j)= *(sayi1+i);
+            j--;
+        }
+    }
+    int n = cevapBoyut - 1; // toplama işlemi için birler basamağından başlıyoruz.
+    while(n>=0){//cevap arrayinin ilk indexine kadar dönüyoruz.
+        if((*(sayi1+n) + *(yeniSayiArray+n)) > 9){
+            *(cevap + n - 1) =  1;
+            *(cevap + n) += *((sayi1 + n) + *(yeniSayiArray + n))%10;
+        }
+        else
+            *(cevap + n) += *(sayi1 + n) + *(yeniSayiArray + n);
 
+        n--;
+}
+void cikarmaIslemi(uint8_t *sayi1, uint8_t *sayi2, int sayi1Boyut, int sayi2Boyut, uint8_t *cevapArray, int cevapBoyut){
+    int n = cevapBoyut - 1; // toplama işlemi içib birler basamağından başlıyoruz.
+    int i = sayi1Boyut - 1; // birinci arrayin index sayısı.
+    int j = sayi2Boyut - 1; //ikinci arrayin index sayısı.
+    int cevap = 0;
+    int elde = 0;
+    while(cevapBoyut>=0){
+        if(j<=0){
+            cevap = *(sayi1+i) - *(sayi2+i) - elde ;
+            if(cevap < 0){
+                cevap *= -1;
+                elde = 1;
+            }
+            else
+                elde = 0;
+            cevapArray[n] = cevap;
+        }
+        else if (j==-1){
+            cevap = *(sayi1+i+1) - *(sayi2+i+1) - elde ;
+            if(cevap<0) 
+                cevapArray[n] = *(sayi1+i) - 1 ;
+            else 
+                cevapArray[n] = *(sayi1+i);
+        }
+        else 
+            cevapArray[n] = *(sayi1+i);
+
+        cevapBoyut--;
+        i--;
+        j--;
+    }   
 }
 
 //renkli çıktı kodları
