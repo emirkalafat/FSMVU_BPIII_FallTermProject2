@@ -70,8 +70,9 @@ int main(int argc, char const *argv[])
         case 3: //Toplama İşlemi.
             cevapArray = int8ArrayOlustur(cevapBoyut);
             toplamaIslemi(sayi1Array,sayi2Array,sayi1Boyut,sayi2Boyut,cevapArray,cevapBoyut);
+            arrayYazdir(cevapArray,cevapBoyut);
             break;
-        case 4:
+        case 4: //şimdilik test seçenği
             printf("%d\n",(uint8_t)'0');
             puts("HAZIR DEGIL");
         case 5: //Sonucu ekrana yazdır:
