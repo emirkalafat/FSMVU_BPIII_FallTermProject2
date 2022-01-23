@@ -16,13 +16,12 @@ int main(int argc, char const *argv[])
     FILE *sayi1File;
     FILE *sayi2File;
     FILE *cevap;
-    char *char1Array;
-    char *char2Array;
     uint8_t *sayi1Array;
     uint8_t *sayi2Array;
     uint8_t *cevapArray;
     int sayi1Boyut;
     int sayi2Boyut;
+    int cevapBoyut;
     int girdi;
     puts("===============Cok Basamakli Sayilar Ile Islemler=========");
     do{
@@ -48,29 +47,29 @@ int main(int argc, char const *argv[])
             else{
                 sayi1Boyut=arrayBoyutHesapla(sayi1File);
                 sayi2Boyut=arrayBoyutHesapla(sayi2File);
-                sayi1Array=arrayOlustur(sayi1Boyut);
-                char1Array=charArrayOlustur(sayi1Boyut);
-                sayi2Array=arrayOlustur(sayi2Boyut);
-                char2Array=charArrayOlustur(sayi2Boyut);
+                cevapBoyut=buyukBoyutuDondur(sayi1Boyut,sayi2Boyut)+1;
+                sayi1Array=int8ArrayOlustur(sayi1Boyut);
+                sayi2Array=int8ArrayOlustur(sayi2Boyut);
+
                 printf("Birinci sayinin boyutu: %d\n",sayi1Boyut);
                 printf("Ikinci sayinin boyutu: %d\n",sayi2Boyut);
-                arrayDoldur(sayi1File, char1Array);
-                arrayDoldur(sayi2File,char2Array);
-                charToUint(char1Array,sayi1Array);
-                charToUint(char2Array,sayi2Array);
+                
+                arrayDoldur(sayi1File,sayi1Array);
+                arrayDoldur(sayi2File,sayi2Array);
+
             }
             break;
         case 2: //[2]-> Okunan sayilari ekrana yaz: (2)
             puts(".:Sayi1.txt dosyasindan okunan sayi:.");
-            arrayYazdir(sayi1Array);
+            arrayYazdir(sayi1Array,sayi1Boyut);
             puts("======================================");
             puts(".:Sayi2.txt dosyasindan okunan sayi:.");
-            arrayYazdir(sayi2Array);
+            arrayYazdir(sayi2Array,sayi2Boyut);
             puts("======================================");
             break;
         case 3: //Toplama İşlemi.
-            cevapArray = arrayOlustur(buyukBoyutuDondur(sayi1Boyut,sayi2Boyut)+1);
-            toplamaIslemi(sayi1Array,sayi2Array,sayi1Boyut,sayi2Boyut,cevapArray);
+            cevapArray = int8ArrayOlustur(cevapBoyut);
+            toplamaIslemi(sayi1Array,sayi2Array,sayi1Boyut,sayi2Boyut,cevapArray,cevapBoyut);
             break;
         case 4:
             printf("%d\n",(uint8_t)'0');
